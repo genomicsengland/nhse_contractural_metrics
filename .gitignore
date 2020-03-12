@@ -1,0 +1,8 @@
+scratchpad.py
+*.pyc
+.DS_Store
+local_config.py
+.gel_config
+venv
+log
+__pycache__
