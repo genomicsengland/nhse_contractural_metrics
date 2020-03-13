@@ -30,7 +30,7 @@ class ncm_fire:
         LOGGER.info('fetching and refreshing all identifiers')
 
         s = make_session()
-        refresh_identifier_table2.run_etl(s)
+        refresh_identifier_table.run_etl(s)
         s.commit()
 
     def refresh_metric_table(self):
