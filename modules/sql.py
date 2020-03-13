@@ -65,7 +65,7 @@ def get_reference_concept_table(codesystem, table_name, e):
 
     LOGGER.debug('running get_reference_concept_table for %s', codesystem)
 
-    sql = f"select local_concept_code, nhs_concept_code from " \
+    sql = f"select uid, local_concept_code, nhs_concept_code from " \
         f"nhse_contractural_metrics_reference.{table_name}"
 
     df = pd.read_sql(sql, con=e)

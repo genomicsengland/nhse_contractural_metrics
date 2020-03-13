@@ -6,8 +6,9 @@ import logging
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from local_config import NCM_DB_CONN_STR,\
-    GR_DB_CONN_STR
-from . import ncm, gr
+    GR_DB_CONN_STR,\
+    BB_DB_CONN_STR
+from . import ncm, gr, bb
 
 LOGGER = logging.getLogger(__name__)
 
@@ -20,6 +21,7 @@ def make_session():
     session = sessionmaker()
     session.configure(binds={ncm.BASE: get_engine(NCM_DB_CONN_STR),
                              gr.Base: get_engine(GR_DB_CONN_STR),
+                             bb.Base: get_engine(BB_DB_CONN_STR),
                              })
     return session()
 

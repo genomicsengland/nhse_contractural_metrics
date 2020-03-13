@@ -121,6 +121,7 @@ class ncm_fire:
             # add each of the table's rows to the concept table in main db
             for x, y in d.iterrows():
                 s.add(ncm.Concept(
+                    uid=y.uid,
                     local_concept_code=y.local_concept_code,
                     nhs_concept_code=y.nhs_concept_code,
                     codesystem=r.codesystem
