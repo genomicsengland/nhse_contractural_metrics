@@ -129,6 +129,16 @@ class ncm_fire:
 
         s.commit()
 
+    def rebuild_ncm_db(self):
+        """
+        rebuild the database:
+        1. build both schemas
+        2. upload reference concept tables
+        3. load into concept table
+        """
+        self.create_ncm_db()
+        self.upload_concept_tables()
+        self.refresh_concept_table()
 
 if __name__ == "__main__":
     fire.Fire(ncm_fire)
