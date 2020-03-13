@@ -57,7 +57,8 @@ class Concept:
 
         # create table
         sql_str = f'create table nhse_contractural_metrics_reference.c_{self.codesystem}\
-            (local_concept_code varchar not null,\
+            (uid uuid not null default uuid_generate_v4(),\
+            local_concept_code varchar not null,\
             nhs_concept_code varchar,\
             de_datetime timestamptz default now());'
         cur.execute(sql_str)
