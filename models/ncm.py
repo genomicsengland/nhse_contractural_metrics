@@ -61,10 +61,12 @@ class IdentifierRelationship(BASE):
     __tablename__ = "identifier_relationship"
     __table_args__ = {"schema": "nhse_contractural_metrics"}
 
-    uid = Column(UUID(as_uuid=True), primary_key=True,
-                 server_default=text("uuid_generate_v4()"))
-    child_identifier_uid = Column(ForeignKey("nhse_contractural_metrics.identifier.uid"))
-    parent_identifier_uid = Column(ForeignKey("nhse_contractural_metrics.identifier.uid"))
+    child_identifier_uid = Column(ForeignKey(
+        "nhse_contractural_metrics.identifier.uid"), primary_key=True)
+    parent_identifier_uid = Column(ForeignKey(
+        "nhse_contractural_metrics.identifier.uid"), primary_key=True)
+    type_cid = Column(ForeignKey("nhse_contractural_metrics.concept.uid"),
+                      nullable=False)
     de_datetime = Column(DateTime, nullable=False,
                          default=datetime.datetime.now())
 

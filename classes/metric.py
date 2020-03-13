@@ -75,7 +75,6 @@ class Metric:
             for x in self.data:
                 x['metric'] = all_metric_cid[x['metric']]
 
-
         for x in self.data:
 
             a = ncm.Metric(

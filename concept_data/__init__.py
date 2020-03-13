@@ -10,5 +10,6 @@ __all__ = [
     "other_code",
     "metric",
     "identifier",
+    "identifier_relationship",
     "administrative_gender",
 ]

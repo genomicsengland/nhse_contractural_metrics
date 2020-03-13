@@ -38,6 +38,15 @@ ID_CONFIG = {
             'human_readable_id': None
         }
     },
+    'genomic_record_referral':
+    {
+        'source': {
+            'db': 'gr',
+            'table': 'Referral',
+            'uid': 'uid',
+            'human_readable_id': 'referral_human_readable_stored_id'
+        }
+    },
     'biobank_gel1008_platekey':
     {
         'source': {
@@ -123,4 +132,4 @@ def run_etl(s):
             for attr in x.keys():
                 setattr(i, attr, x[attr])
 
-            s.add(i)
+            s.merge(i)

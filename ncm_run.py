@@ -4,15 +4,17 @@ main file for the nshe contractural metrics etls
 each of the functions within the ncm class below can be called from
 the command line with python main.py <function>
 """
+# set up loggers and make one for this module
+from modules import log
+log.setup_logger()
+
 import logging
 import fire
 from models import make_session
-from modules import log
 from etl import refresh_identifier_table,\
-    refresh_metric_table
+    refresh_metric_table,\
+    refresh_identifier_relationship_table
 
-# set up loggers and make one for this module
-log.setup_logger()
 LOGGER = logging.getLogger(__name__)
 
 
@@ -32,6 +34,19 @@ class ncm_fire:
         s = make_session()
         refresh_identifier_table.run_etl(s)
         s.commit()
+
+    def refresh_identifier_relationship_table(self):
+        """
+        gather all identifier relationships required and add/update table
+        in main db
+        """
+
+        LOGGER.info('fetching and refreshing all identifier relationships')
+
+        s = make_session()
+        refresh_identifier_relationship_table.run_etl(s)
+        s.commit()
+
 
     def refresh_metric_table(self):
         """
