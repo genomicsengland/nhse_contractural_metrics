@@ -81,10 +81,10 @@ class Metric(BASE):
     __tablename__ = "metric"
     __table_args__ = {"schema": "nhse_contractural_metrics"}
 
-    uid = Column(UUID(as_uuid=True), primary_key=True,
-                 server_default=text("uuid_generate_v4()"))
-    identifier_uid = Column(ForeignKey("nhse_contractural_metrics.identifier.uid"))
-    type_cid = Column(ForeignKey("nhse_contractural_metrics.concept.uid"))
+    identifier_uid = Column(ForeignKey("nhse_contractural_metrics.identifier.uid"),
+                            primary_key=True)
+    type_cid = Column(ForeignKey("nhse_contractural_metrics.concept.uid"),
+                      primary_key=True)
     value_cid = Column(ForeignKey("nhse_contractural_metrics.concept.uid"))
     value_integer = Column(Integer)
     value_numeric = Column(Numeric)

@@ -19,17 +19,31 @@ add constraint only_one_non_null check (
 
 /* trigger function to copy row into archives table */
 /* metrics table */
+create table nhse_contractural_metrics.metric_archive (
+	uid uuid not null default uuid_generate_v4(),
+	identifier_uid uuid not null,
+	type_cid uuid not null,
+	value_cid uuid null,
+	value_integer int4 null,
+	value_numeric numeric null,
+	value_boolean bool null,
+	value_string varchar null,
+	value_datetime timestamp null,
+	de_datetime timestamp not null,
+	valid_from_datetime timestamptz not null default now(),
+	valid_to_datetime timestamptz
+);
 /* function */
-create table nhse_contractural_metrics.metric_archive as table nhse_contractural_metrics.metric;
-alter table nhse_contractural_metrics.metric_archive owner to cdt_user;
 create or replace function nhse_contractural_metrics.metric_archive_f ()
 returns trigger
 as
 $$
 begin
+update nhse_contractural_metrics.metric_archive
+set valid_to_datetime = now()
+where identifier_uid = new.identifier_uid and type_cid = new.type_cid and valid_to_datetime is null;
 insert into nhse_contractural_metrics.metric_archive
     (
-        uid,
         identifier_uid,
         type_cid,
         value_cid,
@@ -42,7 +56,6 @@ insert into nhse_contractural_metrics.metric_archive
     )
     values
     (
-        new.uid,
         new.identifier_uid,
         new.type_cid,
         new.value_cid,
@@ -60,7 +73,7 @@ language plpgsql;
 alter function nhse_contractural_metrics.metric_archive_f owner to cdt_user;
 /* trigger */
 create trigger metric_archive_t
-after insert
+after insert or update
 on nhse_contractural_metrics.metric
 for each row
 execute procedure nhse_contractural_metrics.metric_archive_f();
