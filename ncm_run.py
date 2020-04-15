@@ -59,6 +59,17 @@ class ncm_fire:
         refresh_metric_table.run_etl(s)
         s.commit()
 
+    def refresh_db(self):
+        """
+        gather all identifiers, relationships and metrics and update db
+        """
+
+        LOGGER.info('refreshing ncm db')
+
+        self.refresh_identifier_table()
+        self.refresh_identifier_relationship_table()
+        self.refresh_metric_table()
+
 
 if __name__ == "__main__":
     fire.Fire(ncm_fire)

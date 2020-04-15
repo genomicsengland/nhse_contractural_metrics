@@ -19,7 +19,7 @@ def get_data(s):
     q = s.query(gr.Patient.uid,
                 gr.Concept.concept_code.label('metric')).\
         join(gr.Concept,
-             gr.Patient.administrative_gender_cid ==\
+             gr.Patient.administrative_gender_cid ==
              gr.Concept.uid)
 
     return [x._asdict() for x in q]
