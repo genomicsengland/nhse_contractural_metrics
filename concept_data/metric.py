@@ -7,5 +7,6 @@ DATA = [
     ('person_birth_date', None),
     ('postcode_of_usual_address', None),
     ('nhs_number', None),
-    ('ethnic_category', None)
+    ('ethnic_category', None),
+    ('test_urgency' None),
 ]
