@@ -23,9 +23,9 @@ def get_data(s):
 <<<<<<< HEAD
     q = s.query(gr.Patient.uid,
 =======
-    q = s.query(gr.patient.uid.label('uid'),
+    q = s.query(gr.Patient.uid,
 >>>>>>> 4bf8a3677b4d338b6fe3c65dfd36b4b4db8865a7
-                gr.concept.concept_code.label('metric')
+                gr.Concept.concept_code.label('metric')
     ).\
     join(gr.Concept,
              gr.Patient.ethnicity_cid ==

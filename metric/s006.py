@@ -19,8 +19,8 @@ def get_data(s):
     q = s.query(gr.Referral.uid,
                 gr.Concept.concept_code.label('metric')
     ).\
-    join(gr.concept,
+    join(gr.Concept,
              gr.referral.priority_cid ==
-             gr.concept.uid)
+             gr.Concept.uid)
     
     return [x._asdict() for x in q]
